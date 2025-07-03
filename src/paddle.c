@@ -29,7 +29,7 @@ void UpdatePaddle(Paddle *paddle) {
 
 void DrawPaddle(Paddle *paddle) {
     DrawRectangle(paddle->position.x, paddle->position.y, paddle->size.x,
-                  paddle->size.y, WHITE);
+                  paddle->size.y, BLUE);
 }
 
 int GetPaddleDirection() {

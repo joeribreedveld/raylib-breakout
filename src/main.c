@@ -1,3 +1,4 @@
+#include "game.h"
 #include "paddle.h"
 #include "raylib.h"
 
@@ -10,24 +11,24 @@ int main() {
 
     SetTargetFPS(60);
 
-    Paddle *paddle = InitPaddle();
+    Game *game = InitGame();
 
     while (!WindowShouldClose()) {
         /* Update */
-        UpdatePaddle(paddle);
+        UpdateGame(game);
 
         /* Draw */
         BeginDrawing();
 
         ClearBackground(BLACK);
 
-        DrawPaddle(paddle);
+        DrawGame(game);
 
         EndDrawing();
     }
 
     /* DeInit */
-    UnloadPaddle(paddle);
+    UnloadGame(game);
 
     CloseWindow();
 
