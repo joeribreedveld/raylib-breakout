@@ -2,22 +2,50 @@
 
 #include <stdlib.h>
 
+#include "raymath.h"
+
 Paddle *InitPaddle() {
     Paddle *paddle = malloc(sizeof(Paddle));
 
-    paddle->size = (Vector2){PADDLE_WIDTH, PADDLE_HEIGHT};
+    paddle->size = (Vector2){paddleWidth, paddleHeight};
     paddle->position = (Vector2){
         (GetScreenWidth() - paddle->size.x) / 2,
-        GetScreenHeight() - PADDLE_DISTANCE_FROM_BOTTOM - PADDLE_HEIGHT};
+        GetScreenHeight() - paddleDistanceFromBottom - paddle->size.y};
 
     return paddle;
 }
 
-void UpdatePaddle(Paddle *paddle) { return; }
+void UpdatePaddle(Paddle *paddle) {
+    int direction = GetPaddleDirection();
+
+    if (direction == 0) {
+        return;
+    }
+
+    paddle->position.x =
+        Clamp(paddle->position.x + direction * paddleSpeed * GetFrameTime(), 0,
+              GetScreenWidth() - paddle->size.x);
+}
 
 void DrawPaddle(Paddle *paddle) {
     DrawRectangle(paddle->position.x, paddle->position.y, paddle->size.x,
                   paddle->size.y, WHITE);
+}
+
+int GetPaddleDirection() {
+    if (IsKeyDown(KEY_LEFT) && IsKeyDown(KEY_RIGHT)) {
+        return 0;
+    }
+
+    if (IsKeyDown(KEY_LEFT)) {
+        return -1;
+    }
+
+    if (IsKeyDown(KEY_RIGHT)) {
+        return 1;
+    }
+
+    return 0;
 }
 
 void UnloadPaddle(Paddle *paddle) { free(paddle); }

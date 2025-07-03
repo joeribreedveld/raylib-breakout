@@ -1,9 +1,10 @@
 #ifndef PADDLE_H
 #define PADDLE_H
 
-#define PADDLE_WIDTH 48
-#define PADDLE_HEIGHT 12
-#define PADDLE_DISTANCE_FROM_BOTTOM 32
+static const int paddleWidth = 48;
+static const int paddleHeight = 12;
+static const int paddleDistanceFromBottom = 32;
+static const float paddleSpeed = 300.0f;
 
 #include "raylib.h"
 
@@ -17,6 +18,8 @@ Paddle *InitPaddle();
 void UpdatePaddle(Paddle *paddle);
 
 void DrawPaddle(Paddle *paddle);
+
+int GetPaddleDirection();
 
 void UnloadPaddle(Paddle *paddle);
 

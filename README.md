@@ -37,4 +37,5 @@ Breakout (1976) retro arcade game clone with raylib and C.
 
 -   [ ] Multiplayer support
 -   [ ] Highscore tracking
--   [ ] Powerup for paddle width and extra lives
+-   [ ] Power-up for paddle width and extra lives
+-   [ ] Implement paddle velocity as vector for power-down
