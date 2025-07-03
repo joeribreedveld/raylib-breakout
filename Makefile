@@ -1,15 +1,15 @@
 CC=gcc
-CFLAGS=-I/opt/homebrew/opt/raylib/include 
+CFLAGS=-Iinclude -I/opt/homebrew/opt/raylib/include
 LDFLAGS=-L/opt/homebrew/opt/raylib/lib -lraylib
-SRC=src/main.c
+SRC=src/main.c src/ball.c src/brick.c src/game.c src/paddle.c
 TARGET=breakout
 
-default: ${TARGET}
+default: all
 
-${TARGET}:
+all:
 	${CC} ${SRC} ${CFLAGS} ${LDFLAGS} -o ${TARGET} 
 
-run: ${TARGET}
+run: all
 	./${TARGET}
 
 clean:
