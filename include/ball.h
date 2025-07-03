@@ -18,6 +18,8 @@ void UpdateBall(Ball *ball);
 
 void DrawBall(Ball *ball);
 
+float GetInitialBallAngle();
+
 void UnloadBall(Ball *ball);
 
 #endif
