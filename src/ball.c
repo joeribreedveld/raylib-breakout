@@ -40,9 +40,9 @@ void DrawBall(Ball *ball) {
 
 float GetInitialBallAngle() {
     if (GetRandomValue(0, 1) == 0) {
-        return (float)GetRandomValue(-45, 45) * DEG2RAD;
+        return (float)GetRandomValue(angleMin1, angleMax1) * DEG2RAD;
     } else {
-        return (float)GetRandomValue(135, 225) * DEG2RAD;
+        return (float)GetRandomValue(angleMin2, angleMax2) * DEG2RAD;
     }
 }
 
