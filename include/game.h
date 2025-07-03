@@ -1,10 +1,12 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "ball.h"
 #include "paddle.h"
 
 typedef struct Game {
     Paddle *paddle;
+    Ball *ball;
 } Game;
 
 Game *InitGame();
