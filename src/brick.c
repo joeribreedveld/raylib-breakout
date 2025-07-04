@@ -5,9 +5,13 @@
 Brick *InitBrick(int row, int col) {
     Brick *brick = malloc(sizeof(Brick));
 
-    brick->position = (Vector2){col * (float)GetScreenWidth() / brickCols,
-                                row * brickHeight + brickTopOffset};
-    brick->size = (Vector2){(float)GetScreenWidth() / brickCols, brickHeight};
+    float brickWidth =
+        ((float)GetScreenWidth() - ((brickCols + 1) * brickGap)) / brickCols;
+
+    brick->position =
+        (Vector2){(col + 1) * brickGap + col * brickWidth,
+                  ((row + 1) * brickGap) + row * brickHeight + brickTopOffset};
+    brick->size = (Vector2){brickWidth, brickHeight};
     brick->color = GetBrickColor(row);
     brick->isAlive = true;
 

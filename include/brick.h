@@ -3,7 +3,7 @@
 
 static const int brickHeight = 8;
 static const int brickRows = 8;
-static const int brickCols = 12;
+static const int brickCols = 14;
 static const int brickTopOffset = 32;
 static const int brickGap = 4;
 
