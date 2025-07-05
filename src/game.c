@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "brick.h"
+#include "raymath.h"
 
 Game *InitGame() {
     Game *game = malloc(sizeof(Game));
@@ -42,7 +43,13 @@ void UpdateGame(Game *game) {
             game->ball->position, game->ball->radius,
             (Rectangle){game->paddle->position.x, game->paddle->position.y,
                         game->paddle->size.x, game->paddle->size.y})) {
-        game->ball->velocity.y *= -1;
+        /* Rotate velocity based on paddle impact */
+        float distance = (game->ball->position.x - game->paddle->position.x) -
+                         (game->paddle->size.x / 2);
+        float angle = distance / (game->paddle->size.x / 2) * 45;
+
+        game->ball->velocity = Vector2Scale(
+            Vector2Rotate((Vector2){0, -1}, angle * DEG2RAD), ballSpeed);
     }
 
     for (int i = 0; i < brickRows; i++) {

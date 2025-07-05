@@ -30,6 +30,8 @@ void UpdateBall(Ball *ball) {
                  GetScreenWidth() - ball->radius);
 
     /* Ceiling is finish */
+    if (ball->position.y <= 0) {
+    }
 
     /* Floor is death */
 }
