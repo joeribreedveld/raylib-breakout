@@ -6,10 +6,10 @@ Breakout (1976) retro arcade game clone with raylib and C.
 
 -   [x] Control paddle with keyboard arrows
 -   [x] Ball bouncing on walls
--   [ ] Ball bouncing off entities
+-   [x] Multiple layers of profitable bricks
+-   [x] Ball bouncing off entities
 -   [ ] Dynamic ball direction on paddle collision
 -   [ ] Score and lives display
--   [ ] Multiple layers of profitable bricks
 
 ## Elements
 
