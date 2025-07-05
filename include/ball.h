@@ -4,7 +4,7 @@
 #include "raylib.h"
 
 static const int ballRadius = 8;
-static const int ballSpeed = 200;
+static const int ballSpeed = 400;
 static const int angleMin1 = -45;
 static const int angleMax1 = 45;
 static const int angleMin2 = 135;

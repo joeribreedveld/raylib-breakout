@@ -29,7 +29,38 @@ void UpdateGame(Game *game) {
 
     for (int i = 0; i < brickRows; i++) {
         for (int j = 0; j < brickCols; j++) {
+            if (!game->bricks[i][j]) {
+                continue;
+            }
+
             UpdateBrick(game->bricks[i][j]);
+        }
+    }
+
+    /* Collision */
+    if (CheckCollisionCircleRec(
+            game->ball->position, game->ball->radius,
+            (Rectangle){game->paddle->position.x, game->paddle->position.y,
+                        game->paddle->size.x, game->paddle->size.y})) {
+        game->ball->velocity.y *= -1;
+    }
+
+    for (int i = 0; i < brickRows; i++) {
+        for (int j = 0; j < brickCols; j++) {
+            if (!game->bricks[i][j]) {
+                continue;
+            }
+
+            if (CheckCollisionCircleRec(
+                    game->ball->position, game->ball->radius,
+                    (Rectangle){game->bricks[i][j]->position.x,
+                                game->bricks[i][j]->position.y,
+                                game->bricks[i][j]->size.x,
+                                game->bricks[i][j]->size.y})) {
+                game->ball->velocity.y *= -1;
+
+                UnloadBrick(game->bricks[i][j]);
+            }
         }
     }
 }
@@ -40,6 +71,10 @@ void DrawGame(Game *game) {
 
     for (int i = 0; i < brickRows; i++) {
         for (int j = 0; j < brickCols; j++) {
+            if (!game->bricks[i][j]) {
+                continue;
+            }
+
             DrawBrick(game->bricks[i][j]);
         }
     }
@@ -51,6 +86,10 @@ void UnloadGame(Game *game) {
 
     for (int i = 0; i < brickRows; i++) {
         for (int j = 0; j < brickCols; j++) {
+            if (!game->bricks[i][j]) {
+                continue;
+            }
+
             UnloadBrick(game->bricks[i][j]);
         }
     }
