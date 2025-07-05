@@ -2,6 +2,8 @@
 
 Breakout (1976) retro arcade game clone with raylib and C.
 
+<img width="592" alt="Screenshot 2025-07-05 at 12 23 12" src="https://github.com/user-attachments/assets/198f1f90-64d3-4327-a115-1ab006405300" />
+
 ## Features
 
 -   [x] Control paddle with keyboard arrows
