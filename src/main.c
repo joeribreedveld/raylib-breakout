@@ -35,7 +35,9 @@ int main() {
     }
 
     /* DeInit */
-    UnloadGame(game);
+    if (game) {
+        UnloadGame(game);
+    }
 
     CloseWindow();
 

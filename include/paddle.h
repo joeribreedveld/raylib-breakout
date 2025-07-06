@@ -1,7 +1,7 @@
 #ifndef PADDLE_H
 #define PADDLE_H
 
-static const int paddleWidth = 128;
+static const int paddleWidth = 64;
 static const int paddleHeight = 12;
 static const int paddleDistanceFromBottom = 32;
 static const float paddleSpeed = 300.0f;

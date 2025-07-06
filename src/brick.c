@@ -23,6 +23,10 @@ Brick *InitBrick(int row, int col) {
 void UpdateBrick(Brick *brick) { return; }
 
 void DrawBrick(Brick *brick) {
+    if (!brick) {
+        return;
+    }
+
     DrawRectangle(brick->position.x, brick->position.y, brick->size.x,
                   brick->size.y, brick->color);
 }

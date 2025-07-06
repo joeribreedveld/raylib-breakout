@@ -72,16 +72,20 @@ void UpdateGame(Game *game) {
                 game->score++;
 
                 if (ColorIsEqual(game->bricks[i][j]->color, RED)) {
-                    game->ball->modifier = 2;
+                    game->ball->modifier = 1.75;
 
                 } else if (ColorIsEqual(game->bricks[i][j]->color, ORANGE)) {
                     game->ball->modifier = 1.5;
 
                 } else if (ColorIsEqual(game->bricks[i][j]->color, GREEN)) {
-                    game->ball->modifier = 1.2;
+                    game->ball->modifier = 1.25;
+                } else if (ColorIsEqual(game->bricks[i][j]->color, YELLOW)) {
+                    game->ball->modifier = 1;
                 }
 
                 UnloadBrick(game->bricks[i][j]);
+
+                break;
             }
         }
     }
@@ -111,7 +115,7 @@ void DrawGame(Game *game) {
         }
     }
 
-    char score[3];
+    char score[20];
     sprintf(score, "%d", game->score);
 
     /* Text */
@@ -121,9 +125,7 @@ void DrawGame(Game *game) {
 GameState GetGameState(Game *game) { return game->state; }
 
 Game *RestartGame(Game *game) {
-    if (game == NULL) {
-        return InitGame();
-    }
+    UnloadGame(game);
 
     return InitGame();
 }
@@ -142,7 +144,10 @@ void UnloadGame(Game *game) {
 
             UnloadBrick(game->bricks[i][j]);
         }
+
+        free(game->bricks[i]);
     }
 
+    free(game->bricks);
     free(game);
 }
