@@ -32,19 +32,16 @@ void DrawBrick(Brick *brick) {
 }
 
 Color GetBrickColor(int row) {
-    if (row / 2 == 0) {
-        return RED;
+    switch (row / 2) {
+        case 0:
+            return RED;
+        case 1:
+            return ORANGE;
+        case 2:
+            return GREEN;
+        default:
+            return YELLOW;
     }
-
-    if (row / 2 == 1) {
-        return ORANGE;
-    }
-
-    if (row / 2 == 2) {
-        return GREEN;
-    }
-
-    return YELLOW;
 }
 
 void UnloadBrick(Brick *brick) { free(brick); }

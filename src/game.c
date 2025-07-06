@@ -31,16 +31,6 @@ void UpdateGame(Game *game) {
     UpdatePaddle(game->paddle);
     UpdateBall(game->ball);
 
-    for (int i = 0; i < brickRows; i++) {
-        for (int j = 0; j < brickCols; j++) {
-            if (!game->bricks[i][j]) {
-                continue;
-            }
-
-            UpdateBrick(game->bricks[i][j]);
-        }
-    }
-
     /* Collision */
     if (CheckCollisionCircleRec(
             game->ball->position, game->ball->radius,
@@ -55,12 +45,11 @@ void UpdateGame(Game *game) {
             Vector2Rotate((Vector2){0, -1}, angle * DEG2RAD), ballSpeed);
     }
 
-    /* TODO: Modularize all collisions */
+    bool collision = false;
+
     for (int i = 0; i < brickRows; i++) {
         for (int j = 0; j < brickCols; j++) {
-            if (!game->bricks[i][j]) {
-                continue;
-            }
+            if (!game->bricks[i][j]) continue;
 
             if (CheckCollisionCircleRec(
                     game->ball->position, game->ball->radius,
@@ -71,24 +60,26 @@ void UpdateGame(Game *game) {
                 game->ball->velocity.y *= -1;
                 game->score++;
 
-                if (ColorIsEqual(game->bricks[i][j]->color, RED)) {
+                Color c = game->bricks[i][j]->color;
+
+                if (ColorIsEqual(c, RED))
                     game->ball->modifier = 1.75;
-
-                } else if (ColorIsEqual(game->bricks[i][j]->color, ORANGE)) {
+                else if (ColorIsEqual(c, ORANGE))
                     game->ball->modifier = 1.5;
-
-                } else if (ColorIsEqual(game->bricks[i][j]->color, GREEN)) {
+                else if (ColorIsEqual(c, GREEN))
                     game->ball->modifier = 1.25;
-                } else if (ColorIsEqual(game->bricks[i][j]->color, YELLOW)) {
-                    game->ball->modifier = 1;
-                }
+                else
+                    game->ball->modifier = 1.0;
 
                 UnloadBrick(game->bricks[i][j]);
+                game->bricks[i][j] = NULL;
 
-                break;
+                goto collision_handled;
             }
         }
     }
+
+collision_handled:
 
     if (game->ball->position.y >= GetScreenHeight() - game->ball->radius) {
         FinishGame(game);
@@ -125,9 +116,11 @@ void DrawGame(Game *game) {
 GameState GetGameState(Game *game) { return game->state; }
 
 Game *RestartGame(Game *game) {
+    Game *newGame = InitGame();
+
     UnloadGame(game);
 
-    return InitGame();
+    return newGame;
 }
 
 void FinishGame(Game *game) { game->state = FINISHED; }
