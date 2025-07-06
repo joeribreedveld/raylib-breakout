@@ -10,11 +10,19 @@ int main() {
 
     SetTargetFPS(60);
 
-    Game *game = InitGame();
+    Game *game;
+
+    game = InitGame();
 
     while (!WindowShouldClose()) {
         /* Update */
-        UpdateGame(game);
+        if (GetGameState(game) != FINISHED) {
+            UpdateGame(game);
+        }
+
+        if (GetGameState(game) == FINISHED && IsKeyPressed(KEY_SPACE)) {
+            game = RestartGame(game);
+        }
 
         /* Draw */
         BeginDrawing();

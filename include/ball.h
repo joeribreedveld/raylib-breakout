@@ -14,6 +14,7 @@ typedef struct Ball {
     Vector2 position;
     Vector2 velocity;
     int radius;
+    float modifier;
 } Ball;
 
 Ball *InitBall();

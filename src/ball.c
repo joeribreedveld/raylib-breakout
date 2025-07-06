@@ -11,6 +11,7 @@ Ball *InitBall() {
     Ball *ball = malloc(sizeof(Ball));
 
     ball->radius = ballRadius;
+    ball->modifier = 1;
     ball->position =
         (Vector2){(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
 
@@ -22,18 +23,13 @@ Ball *InitBall() {
 }
 
 void UpdateBall(Ball *ball) {
-    ball->position = Vector2Add(ball->position,
-                                Vector2Scale(ball->velocity, GetFrameTime()));
+    ball->position = Vector2Add(
+        ball->position,
+        Vector2Scale(ball->velocity, GetFrameTime() * ball->modifier));
 
     /* Bounce off side walls */
     ReflectClamp(&ball->position.x, &ball->velocity.x, ball->radius,
                  GetScreenWidth() - ball->radius);
-
-    /* Ceiling is finish */
-    if (ball->position.y <= 0) {
-    }
-
-    /* Floor is death */
 }
 
 void DrawBall(Ball *ball) {
